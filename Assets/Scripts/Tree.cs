@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Tree : MonoBehaviour
 {
@@ -14,8 +16,12 @@ public class Tree : MonoBehaviour
         private float maxAge;
         [SerializeField, Tooltip("Height gained per age unit")]
         private float growthFactor;
-
-        // Private variables
+        [SerializeField, Header("Seed attributes"), Tooltip("GameObject that represents the seed that can be spawned by this tree")]
+        private GameObject seedObject;
+        [SerializeField, Tooltip("Maximum magnitude for spawning the seed. Minimum is hard set to 1.0")]
+        private float maxSpawnMagnitude;
+        [SerializeField, Tooltip("How much time should pass before spawning a new seed")]
+        private float spawnTimer;
 
         #endregion
 
@@ -27,18 +33,37 @@ public class Tree : MonoBehaviour
 
     #region Methods
 
-        void SpawnSeed()
-            {
-
-            }
-
-        #endregion
-
         void Grow(float deltaTime)
         {
             Age += Time.deltaTime;
+            if (Age > maxAge)
+            {
+                StartCoroutine("SpawnCycle");
+            }
             this.transform.localScale += new Vector3(0.0f, growthFactor *Time.deltaTime, 0.0f);
         }
+        void SpawnSeed()
+        {
+            // Generate random direction in the y plane
+            Vector3 randomDirection = new Vector3(Random.Range(-1.0f, 1.0f),0.0f, Random.Range(-1.0f, 1.0f)).normalized;
+            float randomMagnitude = Random.Range(1.0f, maxSpawnMagnitude);
+            
+            // Instantiate a new seed object following the random direction and a random magnitude
+            var currentTransform = this.transform;
+            Instantiate(seedObject, currentTransform.position + randomDirection * randomMagnitude, currentTransform.rotation);
+        }
+
+        IEnumerator SpawnCycle()
+        {
+            for(;;) 
+            {
+                SpawnSeed();
+                yield return new WaitForSeconds(spawnTimer);
+            }
+        }
+
+    #endregion
+
 
     #region Functions
 
