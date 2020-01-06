@@ -222,6 +222,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 239980997, guid: 1818b69e4fd95904b88fe309c0851b76, type: 3}
+      propertyPath: spawnTimer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4499949511893705355, guid: 1818b69e4fd95904b88fe309c0851b76,
         type: 3}
       propertyPath: m_Name

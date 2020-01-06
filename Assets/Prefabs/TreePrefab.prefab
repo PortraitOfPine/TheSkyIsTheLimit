@@ -44,13 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59e37dfdf5289f944ae0c3d1ac4ff4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingAge: 0
-  maxAge: 10
-  growthFactor: 0.1
+  ageMaxHeight: 10
+  ageDeath: 20
+  ageSpawnSeed: 10
   seedObject: {fileID: 5260576090282540074, guid: 218c9a9e7e45c1e4c800f28a4b70ee2b,
     type: 3}
   maxSpawnMagnitude: 3
-  spawnTimer: 3
+  spawnTimer: 5
+  growthFactor: 0.1
 --- !u!1001 &1820088761260999416
 PrefabInstance:
   m_ObjectHideFlags: 0

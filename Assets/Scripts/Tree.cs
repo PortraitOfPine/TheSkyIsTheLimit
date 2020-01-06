@@ -4,44 +4,66 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class Tree : MonoBehaviour
+public class Tree : Plant
 {
     #region Variables
 
         // Editor variables
 
-        [SerializeField, Header("tree attributes"), Tooltip("Starting age for this particular tree")]
-        private float startingAge;
-        [SerializeField, Tooltip("Maximum age for this particular tree")]
-        private float maxAge;
-        [SerializeField, Tooltip("Height gained per age unit")]
-        private float growthFactor;
-        [SerializeField, Header("Seed attributes"), Tooltip("GameObject that represents the seed that can be spawned by this tree")]
+        [SerializeField, Header("tree attributes"), Tooltip("Age at which the tree will stop growing")]
+        private float ageMaxHeight;
+        [SerializeField, Tooltip("Age at which the tree will die")]
+        private float ageDeath;
+        [SerializeField, Tooltip("Age at which the tree will begin spawning seeds")]
+        private float ageSpawnSeed;
+        [SerializeField, Tooltip("GameObject that represents the seed that can be spawned by this tree")]
         private GameObject seedObject;
         [SerializeField, Tooltip("Maximum magnitude for spawning the seed. Minimum is hard set to 1.0")]
         private float maxSpawnMagnitude;
         [SerializeField, Tooltip("How much time should pass before spawning a new seed")]
         private float spawnTimer;
+        [SerializeField, Tooltip("Height gained per age unit")]
+        protected float growthFactor;
 
-        #endregion
+    #endregion
 
     #region Properties
 
-        public float Age { get; set; }
+        protected bool Spawning { get; set; }
 
-        #endregion
+    #endregion
 
     #region Methods
 
-        void Grow(float deltaTime)
+        protected override void Grow(float deltaTime)
         {
-            Age += Time.deltaTime;
-            if (Age > maxAge)
+            base.Grow(deltaTime);
+            
+            
+            // Check if object should die
+            if (Age > ageDeath)
             {
+                Destroy(gameObject);
+            }
+
+
+            // Check if tree should start spawning seeds
+            if (!Spawning && Age > ageSpawnSeed)
+            {
+                Spawning = true;
                 StartCoroutine("SpawnCycle");
             }
-            this.transform.localScale += new Vector3(0.0f, growthFactor *Time.deltaTime, 0.0f);
+
+            // Check if object should grow in size
+            if (Age < ageMaxHeight)
+            {
+                this.transform.localScale += new Vector3(0.0f, this.growthFactor *deltaTime, 0.0f);    
+            }
+
+            
         }
+
+        // Spawn a seed at a random position around the tree object
         void SpawnSeed()
         {
             // Generate random direction in the y plane
@@ -68,19 +90,15 @@ public class Tree : MonoBehaviour
     #region Functions
 
         // Start is called before the first frame update
-        void Start()
+        protected override void Start()
         {
-            Age = startingAge;
-
+            base.Start();
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Age < maxAge)
-            {
-                Grow(Time.deltaTime);
-            }
+            Grow(Time.deltaTime);
         }
 
     #endregion

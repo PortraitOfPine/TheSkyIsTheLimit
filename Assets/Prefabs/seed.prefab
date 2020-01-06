@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4109179258132562597}
   - component: {fileID: 5316675606593918572}
   - component: {fileID: 1868853843353717017}
+  - component: {fileID: -4183918511674981001}
   m_Layer: 0
   m_Name: seed
   m_TagString: Untagged
@@ -93,3 +94,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4183918511674981001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260576090282540074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a859af20cc696949af2a086bbdfa648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ageTransformTree: 10
+  treeObject: {fileID: 4499949511893705355, guid: 1818b69e4fd95904b88fe309c0851b76,
+    type: 3}
