@@ -17,4 +17,9 @@ public class ClockDisplay : MonoBehaviour
     {
         countdown.text = ("" + Time.time); //Showing the Score on the Canvas
     }
+
+    public void ChangeTimeScale(float timeScaleValue)
+    {
+        Time.timeScale = timeScaleValue;
+    }
 }
