@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class Tree : Plant
@@ -25,11 +27,25 @@ public class Tree : Plant
         [SerializeField, Tooltip("Height gained per age unit")]
         protected float growthFactor;
 
+        // Private variables
+        private bool _spawning;
     #endregion
 
     #region Properties
 
-        protected bool Spawning { get; set; }
+        // If active, allow the SpawnCycle coroutine to continue running
+        public bool Spawning { 
+           
+            get => _spawning;
+            set
+            {
+                _spawning = value;
+                if (value == false)
+                {
+                    StopCoroutine(nameof(SpawnCycle));
+                }
+            }
+        }
 
     #endregion
 
@@ -38,7 +54,6 @@ public class Tree : Plant
         protected override void Grow(float deltaTime)
         {
             base.Grow(deltaTime);
-            
             
             // Check if object should die
             if (Age > ageDeath)
@@ -51,7 +66,7 @@ public class Tree : Plant
             if (!Spawning && Age > ageSpawnSeed)
             {
                 Spawning = true;
-                StartCoroutine("SpawnCycle");
+                StartCoroutine(nameof(SpawnCycle));
             }
 
             // Check if object should grow in size
@@ -75,6 +90,7 @@ public class Tree : Plant
             Instantiate(seedObject, currentTransform.position + randomDirection * randomMagnitude, currentTransform.rotation);
         }
 
+        // Coroutine that spawns a new seed after every spawn timer interval
         IEnumerator SpawnCycle()
         {
             for(;;) 
