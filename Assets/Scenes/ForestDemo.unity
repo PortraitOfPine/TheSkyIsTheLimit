@@ -1202,6 +1202,7 @@ MonoBehaviour:
   verticalSpeed: 2
   lowerAngle: 90
   upperAngle: 90
+  movementSpeed: 0.1
 --- !u!1 &1154490016
 GameObject:
   m_ObjectHideFlags: 0

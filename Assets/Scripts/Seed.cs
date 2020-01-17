@@ -13,6 +13,8 @@ public class Seed : Plant
     private float ageTransformTree;
     [SerializeField, Tooltip("GameObject that represents the tree that the seed will become")]
     private GameObject treeObject;
+    [SerializeField, Tooltip("Minimum distance from any tree around the seed")]
+    private float spawnRadius;
 
     #endregion
 
@@ -26,8 +28,11 @@ public class Seed : Plant
         // Check if object should die
         if (Age > ageTransformTree)
         {
-            // Instantiate a new tree object at the current position of the seed
-           Instantiate(treeObject, transform.position, transform.rotation);
+            if (Physics.OverlapSphere(this.transform.position, spawnRadius, 1 << 8).Length == 0)
+            {
+                // Instantiate a new tree object at the current position of the seed
+                Instantiate(treeObject, transform.position, transform.rotation);
+            }
 
             // Destroy the seed
             Destroy(this.gameObject);

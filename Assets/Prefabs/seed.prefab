@@ -109,3 +109,4 @@ MonoBehaviour:
   ageTransformTree: 10
   treeObject: {fileID: 4499949511893705355, guid: 1818b69e4fd95904b88fe309c0851b76,
     type: 3}
+  spawnRadius: 1.5
