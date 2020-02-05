@@ -7,7 +7,6 @@ public class Plant : MonoBehaviour
    #region Variables
 
         // Private variables
-
         private int _birthTime;
 
         #endregion
@@ -26,13 +25,12 @@ public class Plant : MonoBehaviour
             Age += deltaTime;
         }
         
-
     #endregion
 
 
     #region Functions
 
-        // Start is called before the first frame update
+        /// Start is called before the first frame update
         protected virtual void Start()
         {
             // Initialize the age of the plant

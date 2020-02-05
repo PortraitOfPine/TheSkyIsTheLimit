@@ -119,7 +119,8 @@ public class FPSCamera : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
             CameraMovement();
-            Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal") , 0, Input.GetAxisRaw("Vertical"));
+            Debug.Log(moveDirection);
             mainCamera.transform.Translate(moveDirection * movementSpeed);
         }
     }
