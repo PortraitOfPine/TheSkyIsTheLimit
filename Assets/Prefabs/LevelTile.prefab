@@ -108,21 +108,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 005237e4804883b4bb18e9fc30cdd126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTypes:
-  - name: water
-    height: 0.4
-    color: {r: 0.31626022, g: 0.87091005, b: 0.9716981, a: 0}
-  - name: grass
-    height: 0.7
-    color: {r: 0.027411893, g: 0.5283019, b: 0.25281242, a: 0}
-  - name: mountain
-    height: 1
-    color: {r: 0.9245283, g: 0.7359882, b: 0.39684942, a: 0}
   noiseMapGeneration: {fileID: 7264218667241763540}
   tileRenderer: {fileID: 7264218667241763497}
   meshFilter: {fileID: 7264218667241763496}
   meshCollider: {fileID: 7264218667241763542}
   mapScale: 3
+  heightTerrainTypes:
+  - name: water
+    height: 0.4
+    color: {r: 0.3537736, g: 1, b: 0.9999998, a: 0}
+    index: 1
+  - name: grass
+    height: 0.7
+    color: {r: 0.12459949, g: 0.754717, b: 0.44928464, a: 0}
+    index: 2
+  - name: mountain
+    height: 1
+    color: {r: 0.7924528, g: 0.49526808, b: 0, a: 0}
+    index: 3
   heightMultiplier: 5
   heightCurve:
     serializedVersion: 2
